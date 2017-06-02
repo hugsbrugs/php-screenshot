@@ -17,11 +17,15 @@ class Screenshot
 
     public $url;
 
+    public $cache = true;
+
     /**
      *
      */
-    function __construct()
+    function __construct($cache = true)
     {
+        $this->cache = $cache;
+
         # Check Provider file constant exists
         if(defined('HUG_SCREENSHOT_PROVIDERS'))
         {
@@ -60,8 +64,6 @@ class Screenshot
         $response = ['status' => 'error', 'message' => '', 'images' => [], 'details' => []];
 
         $this->url = $url;
-
-        # Check for Cache Image
         
         # Loop Over Services Until Response
         foreach ($widths as $key => $width)
@@ -70,20 +72,31 @@ class Screenshot
             {
                 $url_image_name = Screenshot::url_2_image($url, $width);
 
-                $provider_name = 'Hug\Screenshot\Provider\\'.$provider->provider;
-                $screenshot_provider = new $provider_name($provider, $width);
-
-                $res = $screenshot_provider->shot($url, $url_image_name);
-                
-                if($res['status']==='success')
+                # Check for Cache Image
+                if($this->cache && file_exists(HUG_SCREENSHOT_SAVE_PATH.$url_image_name))
+                // && file_last_mod < 1 week
                 {
-                    $response['status'] = 'success';
-                    $response['images'][$width] = $res['data'];
-                    break;
+                        $response['status'] = 'success';
+                        $response['images'][$width] = $url_image_name;
+                        break;
                 }
                 else
                 {
-                    $response['details'][$provider->provider] = $res['message'];
+                    $provider_name = 'Hug\Screenshot\Provider\\'.$provider->provider;
+                    $screenshot_provider = new $provider_name($provider, $width);
+
+                    $res = $screenshot_provider->shot($url, $url_image_name);
+                    
+                    if($res['status']==='success')
+                    {
+                        $response['status'] = 'success';
+                        $response['images'][$width] = $res['data'];
+                        break;
+                    }
+                    else
+                    {
+                        $response['details'][$provider->provider] = $res['message'];
+                    }
                 }
             }
         }
@@ -100,8 +113,9 @@ class Screenshot
         $url = Http::extract_domain_from_url($url);
         $url .= '-' . $width;
         $url .= 'x' . $height;
-        $date = new \DateTime();
-        $url .= '-' . $date->getTimestamp();
+        // use file_last_mod to know when screenshot has been taken 
+        // $date = new \DateTime();
+        // $url .= '-' . $date->getTimestamp();
         $url .= '.'.$extension;
 
         return $url;
