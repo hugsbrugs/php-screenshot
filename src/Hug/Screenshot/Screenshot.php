@@ -54,6 +54,13 @@ class Screenshot
             # Define System temporary directory
             define('HUG_SCREENSHOT_SAVE_PATH', sys_get_temp_dir());
         }
+
+        if(!defined('HUG_SCREENSHOT_CACHE'))
+        {
+            # Define System temporary directory
+            define('HUG_SCREENSHOT_CACHE', 'P1D');
+        }
+        
     }
 
     /**
@@ -71,10 +78,14 @@ class Screenshot
             foreach ($this->config as $key => $provider)
             {
                 $url_image_name = Screenshot::url_2_image($url, $width);
+                $path = HUG_SCREENSHOT_SAVE_PATH.$url_image_name;
 
                 # Check for Cache Image
-                if($this->cache && file_exists(HUG_SCREENSHOT_SAVE_PATH.$url_image_name))
-                // && file_last_mod < 1 week
+                $file_last_mod = \DateTime::createFromFormat('Y-m-d H:i:s', FileSystem::file_last_mod($path));
+                $a_week_ago = new \DateTime('now');
+                $a_week_ago = $a_week_ago->sub(new \DateInterval(HUG_SCREENSHOT_CACHE));
+                
+                if($this->cache && file_exists($path) && $file_last_mod > $a_week_ago)
                 {
                         $response['status'] = 'success';
                         $response['images'][$width] = $url_image_name;

@@ -20,7 +20,7 @@ final class ScreenshotTest extends TestCase
 
         define('HUG_SCREENSHOT_SAVE_PATH', sys_get_temp_dir());
         define('HUG_SCREENSHOT_PROVIDERS', __DIR__ . '/providers.json');
-
+        define('HUG_SCREENSHOT_CACHE', 'P1W');
     }
 
     /* ************************************************* */

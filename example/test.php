@@ -9,7 +9,7 @@ $data = realpath(__DIR__ . '/../');
 
 define('HUG_SCREENSHOT_SAVE_PATH', $data.'/data/');
 define('HUG_SCREENSHOT_PROVIDERS', $data.'/conf/providers.json');
-
+define('HUG_SCREENSHOT_CACHE', 'P1W');
 
 $Screenshot = new Screenshot();
 
