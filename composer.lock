@@ -49,20 +49,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hugsbrugs/php-http.git",
-                "reference": "68052464a43a9466d062f4d5d8fed8bbdf1ebf00"
+                "reference": "37ef38671d6b56f292473618cc6f87e66ff0f872"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hugsbrugs/php-http/zipball/68052464a43a9466d062f4d5d8fed8bbdf1ebf00",
-                "reference": "68052464a43a9466d062f4d5d8fed8bbdf1ebf00",
+                "url": "https://api.github.com/repos/hugsbrugs/php-http/zipball/37ef38671d6b56f292473618cc6f87e66ff0f872",
+                "reference": "37ef38671d6b56f292473618cc6f87e66ff0f872",
                 "shasum": ""
             },
             "require": {
                 "layershifter/tld-extract": "^1.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.0",
-                "satooshi/php-coveralls": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -80,7 +76,7 @@
                 }
             ],
             "description": "PHP HTTP Utilities",
-            "time": "2017-07-24T07:07:23+00:00"
+            "time": "2019-04-19T11:24:44+00:00"
         },
         {
             "name": "layershifter/tld-database",

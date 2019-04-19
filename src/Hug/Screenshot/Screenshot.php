@@ -7,6 +7,7 @@ use Hug\Http\Http as Http;
 use Hug\Screenshot\Provider\Manet as Manet;
 use Hug\Screenshot\Provider\Apercite as Apercite;
 use Hug\Screenshot\Provider\PagePeeker as PagePeeker;
+use Hug\FileSystem\FileSystem as FileSystem;
 
 /**
  * This class manages different screenshot providers in order to always get a thumb if a provider fails

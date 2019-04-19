@@ -1,7 +1,7 @@
 <?php
 
 # For PHP7
-// declare(strict_types=1);
+declare(strict_types=1);
 
 // namespace Hug\Tests\Screenshot;
 
@@ -15,9 +15,8 @@ use Hug\Screenshot\Screenshot as Screenshot;
 final class ScreenshotTest extends TestCase
 {    
 
-    function __construct()
+    function setUp(): void
     {
-
         define('HUG_SCREENSHOT_SAVE_PATH', sys_get_temp_dir());
         define('HUG_SCREENSHOT_PROVIDERS', __DIR__ . '/providers.json');
         define('HUG_SCREENSHOT_CACHE', 'P1W');
@@ -37,7 +36,7 @@ final class ScreenshotTest extends TestCase
         $widths = ['1024', '768', '480'];
 
         $test = $Screenshot->shot($url, $widths);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertEquals(4, count($test));
         $this->assertEquals('success', $test['status']);
         $this->assertEquals(3, count($test['images']));
