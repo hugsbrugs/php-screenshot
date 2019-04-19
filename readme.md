@@ -27,10 +27,11 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Hug\Screenshot\Screenshot as Screenshot;
 ```
 
-You first have to define two constants
+You first have to define 3 constants
 ```php
 define('HUG_SCREENSHOT_SAVE_PATH', '/path/to/screenshots/');
 define('HUG_SCREENSHOT_PROVIDERS', '/path/to/providers.json');
+define('HUG_SCREENSHOT_CACHE', 'P1W');
 ```
 
 HUG_SCREENSHOT_SAVE_PATH should be writable by webserver user
