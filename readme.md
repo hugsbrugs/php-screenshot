@@ -103,7 +103,7 @@ Screenshot filenames are generated with following conventions :
 ## Unit Tests
 
 ```
-composer exec phpunit
+phpunit --bootstrap vendor/autoload.php tests
 ```
 
 ## Author
