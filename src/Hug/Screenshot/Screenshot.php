@@ -20,6 +20,8 @@ class Screenshot
 
     public $cache = true;
 
+    public $cache_infos = [];
+
     /**
      *
      */
@@ -88,6 +90,7 @@ class Screenshot
                 
                 if($this->cache && file_exists($path) && $file_last_mod > $a_week_ago)
                 {
+                        $this->cache_infos[$width] = $file_last_mod->format('Y-m-d H:i:s');
                         $response['status'] = 'success';
                         $response['images'][$width] = $url_image_name;
                         break;
