@@ -125,15 +125,10 @@ class Screenshot
      */
     public static function url_2_image($url, $width, $height = 'auto', $extension = 'jpg')
     {
-        $url = Http::extract_domain_from_url($url);
-        $url .= '-' . $width;
-        $url .= 'x' . $height;
-        // use file_last_mod to know when screenshot has been taken 
-        // $date = new \DateTime();
-        // $url .= '-' . $date->getTimestamp();
-        $url .= '.'.$extension;
-
-        return $url;
+        $image = Http::url_2_filename($url);
+        $image .= '-' . $width . 'x' . $height .  '.' .$extension;
+        return $image;
     }
+
 
 }
